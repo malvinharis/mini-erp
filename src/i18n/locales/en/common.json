@@ -1,0 +1,21 @@
+{
+  "app": { "name": "mini-erp" },
+  "nav": { "dashboard": "Dashboard", "example": "Examples", "logout": "Log out" },
+  "auth": {
+    "loginTitle": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "signingIn": "Signing in..."
+  },
+  "common": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "loading": "Loading...",
+    "search": "Search"
+  }
+}

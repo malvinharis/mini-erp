@@ -1,0 +1,15 @@
+/* Plain .css — Tailwind directives live here, never in .scss (Sass compiles first). */
+@import "tailwindcss";
+@import "../components/ui/styles/preset.css";
+@config "../../tailwind.config.ts";
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
