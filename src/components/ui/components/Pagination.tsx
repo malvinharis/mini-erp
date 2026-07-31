@@ -15,18 +15,20 @@ export function Pagination({ page, totalPages, onPageChange, className }: Pagina
       className={cn('flex items-center justify-between gap-4', className)}
     >
       <Button
-        variant="outline"
+        variant="bordered"
+        color="default"
         size="sm"
         disabled={page <= 1}
         onClick={() => onPageChange(page - 1)}
       >
         Previous
       </Button>
-      <span className="text-[--color-text-muted] text-sm">
+      <span className="text-gray-500 text-sm dark:text-gray-400">
         Page {page} of {totalPages}
       </span>
       <Button
-        variant="outline"
+        variant="bordered"
+        color="default"
         size="sm"
         disabled={page >= totalPages}
         onClick={() => onPageChange(page + 1)}

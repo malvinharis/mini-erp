@@ -5,8 +5,8 @@ import type { ExampleStatus } from '@/lib/schemas';
 import { formatCurrency, formatDate } from '@/lib/utils/format';
 import Link from 'next/link';
 
-const statusTone: Record<ExampleStatus, 'neutral' | 'success' | 'warning'> = {
-  DRAFT: 'neutral',
+const statusColor: Record<ExampleStatus, 'default' | 'success' | 'warning'> = {
+  DRAFT: 'default',
   ACTIVE: 'success',
   ARCHIVED: 'warning',
 };
@@ -57,13 +57,13 @@ export default async function ExampleListPage({
                   <TD>
                     <Link
                       href={`/example/${row.id}`}
-                      className="text-[--color-primary] hover:underline"
+                      className="text-blue-600 hover:underline dark:text-blue-500"
                     >
                       {row.name}
                     </Link>
                   </TD>
                   <TD>
-                    <Badge tone={statusTone[row.status]}>{t(`status.${row.status}`)}</Badge>
+                    <Badge color={statusColor[row.status]}>{t(`status.${row.status}`)}</Badge>
                   </TD>
                   <TD>{formatCurrency(row.amount)}</TD>
                   <TD>{formatDate(row.createdAt)}</TD>
@@ -74,18 +74,23 @@ export default async function ExampleListPage({
 
           <nav aria-label="Pagination" className="flex items-center justify-between">
             <Link href={`/example?page=${page - 1}`} aria-disabled={page <= 1}>
-              <Button variant="outline" size="sm" disabled={page <= 1}>
+              <Button variant="bordered" color="default" size="sm" disabled={page <= 1}>
                 Previous
               </Button>
             </Link>
-            <span className="text-[--color-text-muted] text-sm">
+            <span className="text-gray-500 text-sm dark:text-gray-400">
               Page {meta?.page} of {meta?.totalPages}
             </span>
             <Link
               href={`/example?page=${page + 1}`}
               aria-disabled={page >= (meta?.totalPages ?? 1)}
             >
-              <Button variant="outline" size="sm" disabled={page >= (meta?.totalPages ?? 1)}>
+              <Button
+                variant="bordered"
+                color="default"
+                size="sm"
+                disabled={page >= (meta?.totalPages ?? 1)}
+              >
                 Next
               </Button>
             </Link>

@@ -21,7 +21,7 @@ export default async function ExampleDetailPage({
       <div className="flex items-center justify-between">
         <h1 className="font-semibold text-2xl">{example.name}</h1>
         <form action={remove}>
-          <Button type="submit" variant="danger" size="sm">
+          <Button type="submit" variant="solid" color="danger" size="sm">
             Delete
           </Button>
         </form>

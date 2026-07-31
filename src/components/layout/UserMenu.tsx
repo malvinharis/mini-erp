@@ -12,11 +12,11 @@ export function UserMenu({ user }: { user: AuthUser }) {
     <div className="flex items-center gap-3">
       <div className="flex flex-col items-end leading-tight">
         <span className="font-medium text-sm">{user.name}</span>
-        <span className="text-[--color-text-muted] text-xs">{user.email}</span>
+        <span className="text-gray-500 text-xs dark:text-gray-400">{user.email}</span>
       </div>
-      <Badge tone={user.role === 'ADMIN' ? 'primary' : 'neutral'}>{user.role}</Badge>
+      <Badge color={user.role === 'ADMIN' ? 'primary' : 'default'}>{user.role}</Badge>
       <form action={logoutAction}>
-        <Button variant="ghost" size="sm" type="submit" aria-label={t('nav.logout')}>
+        <Button variant="flat" color="default" size="sm" type="submit" aria-label={t('nav.logout')}>
           <LogOut size={16} />
         </Button>
       </form>

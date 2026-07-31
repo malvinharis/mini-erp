@@ -1,9 +1,15 @@
 export { cn } from './lib/cn';
+export type { UIColor, UIVariant } from './lib/variants';
 export { Button, type ButtonProps } from './components/Button';
 export { Input, type InputProps } from './components/Input';
-export { Card, CardHeader, CardTitle, CardBody } from './components/Card';
+export { Textarea, type TextareaProps } from './components/Textarea';
+export { Select, type SelectProps } from './components/Select';
+export { Card, CardHeader, CardTitle, CardBody, type CardProps } from './components/Card';
 export { Badge, type BadgeProps } from './components/Badge';
+export { Avatar, type AvatarProps } from './components/Avatar';
 export { Table, THead, TR, TH, TD } from './components/Table';
 export { Pagination, type PaginationProps } from './components/Pagination';
 export { EmptyState, type EmptyStateProps } from './components/EmptyState';
-export { Spinner } from './components/Spinner';
+export { Spinner, type SpinnerProps } from './components/Spinner';
+export { Modal, type ModalProps } from './components/Modal';
+export { Dropdown, DropdownItem, type DropdownProps } from './components/Dropdown';

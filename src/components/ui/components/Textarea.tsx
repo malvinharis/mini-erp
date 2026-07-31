@@ -1,31 +1,36 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
-import type { InputHTMLAttributes } from 'react';
+import type { TextareaHTMLAttributes } from 'react';
 import { cn } from '../lib/cn';
 import { fieldStateVariants } from '../lib/variants';
 
-const input = cva(
+const textarea = cva(
   'w-full rounded-lg border bg-white text-gray-900 placeholder:text-gray-400 transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-900 dark:text-gray-50 dark:placeholder:text-gray-500',
   {
     variants: {
       color: fieldStateVariants,
       size: {
-        sm: 'h-8 px-2.5 text-sm',
-        md: 'h-10 px-3 text-sm',
-        lg: 'h-12 px-4 text-base',
+        sm: 'px-2.5 py-2 text-sm',
+        md: 'px-3 py-2.5 text-sm',
+        lg: 'px-4 py-3 text-base',
       },
     },
     defaultVariants: { color: 'default', size: 'md' },
   },
 );
 
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'color' | 'size'>,
-    VariantProps<typeof input> {}
+export interface TextareaProps
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'>,
+    VariantProps<typeof textarea> {}
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, color, size, ...props }, ref) => (
-    <input ref={ref} className={cn(input({ color, size }), className)} {...props} />
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, color, size, rows = 4, ...props }, ref) => (
+    <textarea
+      ref={ref}
+      rows={rows}
+      className={cn(textarea({ color, size }), className)}
+      {...props}
+    />
   ),
 );
-Input.displayName = 'Input';
+Textarea.displayName = 'Textarea';

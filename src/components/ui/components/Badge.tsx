@@ -1,22 +1,33 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
 import { cn } from '../lib/cn';
+import { type UIColor, type UIVariant, colorVariants } from '../lib/variants';
 
-const badge = cva('inline-flex items-center rounded-full px-2.5 py-0.5 font-medium text-xs', {
+const badge = cva('inline-flex items-center rounded-full font-medium', {
   variants: {
-    tone: {
-      neutral: 'bg-[--color-surface-muted] text-[--color-text-muted]',
-      primary: 'bg-[--color-primary] text-[--color-primary-foreground]',
-      success: 'bg-[--color-success] text-white',
-      warning: 'bg-[--color-warning] text-black',
-      danger: 'bg-[--color-danger] text-white',
+    size: {
+      sm: 'px-2 py-0.5 text-xs',
+      md: 'px-2.5 py-1 text-xs',
     },
   },
-  defaultVariants: { tone: 'neutral' },
+  defaultVariants: { size: 'md' },
 });
 
-export interface BadgeProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badge> {}
+export interface BadgeProps
+  extends HTMLAttributes<HTMLSpanElement>,
+    Omit<VariantProps<typeof badge>, 'color'> {
+  variant?: UIVariant;
+  color?: UIColor;
+}
 
-export function Badge({ className, tone, ...props }: BadgeProps) {
-  return <span className={cn(badge({ tone }), className)} {...props} />;
+export function Badge({
+  className,
+  variant = 'flat',
+  color = 'default',
+  size,
+  ...props
+}: BadgeProps) {
+  return (
+    <span className={cn(badge({ size }), colorVariants[variant][color], className)} {...props} />
+  );
 }

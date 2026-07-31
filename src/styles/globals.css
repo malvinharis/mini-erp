@@ -1,15 +1,9 @@
-/* Plain .css — Tailwind directives live here, never in .scss (Sass compiles first). */
+/* Real Tailwind entry point. Plain .css — Tailwind directives (@import
+   "tailwindcss", @config) must be seen by PostCSS, never by Sass, so this
+   file stays untouched. Actual rules are authored in globals.scss and
+   compiled to globals.generated.css via `pnpm build:styles` (see
+   docs/superpowers/specs/2026-07-31-heroui-native-tailwind-design-system-design.md §0.1).
+   Don't hand-edit globals.generated.css — edit globals.scss and rebuild. */
 @import "tailwindcss";
-@import "../components/ui/styles/preset.css";
+@import "./globals.generated.css";
 @config "../../tailwind.config.ts";
-
-:root {
-  color-scheme: light;
-}
-
-body {
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
-  -webkit-font-smoothing: antialiased;
-}

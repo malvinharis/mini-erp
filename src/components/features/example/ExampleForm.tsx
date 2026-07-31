@@ -48,7 +48,7 @@ export function ExampleForm({ defaultValues, onSubmit, submitLabel }: Props) {
         <select
           id="example-status"
           {...register('status')}
-          className="h-10 rounded-md border border-[--color-border] bg-[--color-surface] px-3 text-sm"
+          className="h-10 rounded-lg border border-gray-300 bg-white px-3 text-sm dark:border-gray-700 dark:bg-gray-900"
         >
           {statuses.map((s) => (
             <option key={s} value={s}>
@@ -67,7 +67,7 @@ export function ExampleForm({ defaultValues, onSubmit, submitLabel }: Props) {
           {...register('amount', { valueAsNumber: true })}
         />
         {errors.amount ? (
-          <span className="text-[--color-danger] text-xs">{errors.amount.message}</span>
+          <span className="text-red-600 text-xs dark:text-red-500">{errors.amount.message}</span>
         ) : null}
       </label>
 
@@ -75,7 +75,7 @@ export function ExampleForm({ defaultValues, onSubmit, submitLabel }: Props) {
         <Button type="submit" disabled={isSubmitting}>
           {submitLabel}
         </Button>
-        <Button type="button" variant="outline" onClick={() => router.back()}>
+        <Button type="button" variant="bordered" color="default" onClick={() => router.back()}>
           Cancel
         </Button>
       </div>
