@@ -1,0 +1,26 @@
+# Production compose — Next.js web. Port bound to loopback: only host Nginx reaches it.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # substituted from the .env file in this directory (compose auto-loads it)
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    image: mini-erp:latest
+    container_name: mini-erp
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

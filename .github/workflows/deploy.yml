@@ -1,0 +1,50 @@
+name: Deploy Web
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          API_URL: ${{ vars.API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          envs: API_URL,NEXT_PUBLIC_API_URL
+          script: |
+            set -e
+            cd /home/deploy/apps/mini-erp
+
+            git fetch --all
+            git reset --hard origin/main
+
+            # write .env from GitHub Variables — no manual nano on the server
+            cat > .env <<ENVEOF
+            NODE_ENV=production
+            PORT=3000
+            API_URL=${API_URL}
+            NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+            ENVEOF
+            chmod 600 .env
+
+            # NEXT_PUBLIC_API_URL is read from this .env via the compose build arg,
+            # then inlined into the bundle during build.
+            docker compose -f docker-compose.prod.yml build
+            docker compose -f docker-compose.prod.yml up -d
+
+            sleep 10
+            docker compose -f docker-compose.prod.yml ps
+            docker image prune -f
