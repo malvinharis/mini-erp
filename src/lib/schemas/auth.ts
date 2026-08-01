@@ -23,8 +23,12 @@ export const tokenPairSchema = z.object({
 });
 export type TokenPair = z.infer<typeof tokenPairSchema>;
 
-export const userRoleSchema = z.enum(['ADMIN', 'STAFF', 'VIEWER']);
-export type UserRole = z.infer<typeof userRoleSchema>;
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  STAFF = 'STAFF',
+  VIEWER = 'VIEWER',
+}
+export const userRoleSchema = z.nativeEnum(UserRole);
 
 export const authUserSchema = z.object({
   id: z.string().uuid(),

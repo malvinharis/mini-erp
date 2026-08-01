@@ -1,6 +1,6 @@
 import 'server-only';
 import { apiFetch } from '@/lib/api/server';
-import type { AuthUser, UserRole } from '@/lib/schemas';
+import { type AuthUser, UserRole } from '@/lib/schemas';
 
 /** Current authenticated user from the API (`GET /users/me`). */
 export async function getCurrentUser(): Promise<AuthUser> {
@@ -12,7 +12,7 @@ export async function getCurrentUser(): Promise<AuthUser> {
 type Action = 'users.manage';
 
 const CAPABILITIES: Record<Action, UserRole[]> = {
-  'users.manage': ['ADMIN'],
+  'users.manage': [UserRole.ADMIN],
 };
 
 export function can(role: UserRole, action: Action): boolean {

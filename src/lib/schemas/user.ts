@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { userRoleSchema } from './auth';
+import { UserRole, userRoleSchema } from './auth';
 
 /**
  * Users domain — mirrors backend `shared/user.ts`. Single source of truth:
@@ -11,7 +11,7 @@ export const createUserSchema = z
     email: z.string().email(),
     name: z.string().trim().min(1).max(120),
     password: z.string().min(8).max(128),
-    role: userRoleSchema.default('STAFF'),
+    role: userRoleSchema.default(UserRole.STAFF),
   })
   .strict();
 export type CreateUserInput = z.infer<typeof createUserSchema>;

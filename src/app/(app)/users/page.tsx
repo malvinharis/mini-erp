@@ -5,14 +5,14 @@ import { Badge, Button, EmptyState, TD, TH, THead, TR, Table } from '@/component
 import { getT } from '@/i18n/server';
 import { listUsers } from '@/lib/api/users';
 import { can, getCurrentUser } from '@/lib/auth/rbac';
-import type { UserRole } from '@/lib/schemas';
+import { UserRole } from '@/lib/schemas';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const roleColor: Record<UserRole, UIColor> = {
-  ADMIN: 'success',
-  STAFF: 'primary',
-  VIEWER: 'default',
+  [UserRole.ADMIN]: 'success',
+  [UserRole.STAFF]: 'primary',
+  [UserRole.VIEWER]: 'default',
 };
 
 export default async function UsersPage({
