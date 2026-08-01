@@ -9,10 +9,11 @@ export async function getCurrentUser(): Promise<AuthUser> {
 }
 
 /** UI-only capability map. Backend RolesGuard is the real gate. */
-type Action = 'users.manage';
+type Action = 'users.manage' | 'customers.manage';
 
 const CAPABILITIES: Record<Action, UserRole[]> = {
   'users.manage': [UserRole.ADMIN],
+  'customers.manage': [UserRole.ADMIN, UserRole.STAFF],
 };
 
 export function can(role: UserRole, action: Action): boolean {
