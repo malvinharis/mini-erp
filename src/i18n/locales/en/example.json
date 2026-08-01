@@ -1,8 +1,0 @@
-{
-  "title": "Examples",
-  "new": "New example",
-  "empty": "No examples yet",
-  "emptyHint": "Create your first example to get started.",
-  "fields": { "name": "Name", "status": "Status", "amount": "Amount", "createdAt": "Created" },
-  "status": { "DRAFT": "Draft", "ACTIVE": "Active", "ARCHIVED": "Archived" }
-}
