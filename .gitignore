@@ -11,4 +11,5 @@ coverage/
 .DS_Store
 .turbo/
 generated/
+docs/
 src/styles/globals.generated.css

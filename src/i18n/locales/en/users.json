@@ -1,0 +1,43 @@
+{
+  "title": "Users",
+  "new": "New user",
+  "empty": "No users yet",
+  "emptyHint": "Create the first user account.",
+  "fields": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "status": { "active": "Active", "inactive": "Inactive" },
+  "role": { "ADMIN": "ADMIN", "STAFF": "STAFF", "VIEWER": "VIEWER" },
+  "actions": {
+    "menu": "Actions",
+    "changeRole": "Change role",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "delete": "Delete",
+    "dangerZone": "Danger zone"
+  },
+  "create": {
+    "title": "New user",
+    "submit": "Create user"
+  },
+  "changeRole": {
+    "title": "Change role",
+    "confirm": "Save"
+  },
+  "confirm": {
+    "deactivate": "Deactivate this user? They will no longer be able to sign in.",
+    "delete": "Delete this user? This soft-deletes the account."
+  },
+  "toast": {
+    "created": "User created",
+    "updated": "User updated",
+    "deleted": "User deleted",
+    "error": "Something went wrong"
+  },
+  "self": "You cannot change your own role or delete yourself."
+}
