@@ -1,6 +1,12 @@
 {
   "app": { "name": "mini-erp" },
-  "nav": { "dashboard": "Dashboard", "example": "Examples", "logout": "Log out" },
+  "nav": {
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "users": "Users",
+    "logout": "Log out"
+  },
+  "dashboard": { "welcome": "Welcome, {{name}}" },
   "auth": {
     "loginTitle": "Sign in",
     "email": "Email",

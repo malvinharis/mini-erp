@@ -9,3 +9,12 @@ body {
   @apply bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-50;
   font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
 }
+
+// Hide scrollbars everywhere while keeping scroll behavior intact.
+* {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // legacy Edge/IE
+}
+*::-webkit-scrollbar {
+  display: none; // Chrome, Safari, Edge
+}
