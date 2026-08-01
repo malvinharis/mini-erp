@@ -1,20 +1,18 @@
 'use client';
 import { cn } from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
-import { Contact, LayoutDashboard, Users } from 'lucide-react';
+import { LayoutDashboard, Package } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const baseItems = [
+const items = [
   { href: '/', labelKey: 'nav.dashboard', icon: LayoutDashboard },
-  { href: '/customers', labelKey: 'nav.customers', icon: Contact },
+  { href: '/example', labelKey: 'nav.example', icon: Package },
 ] as const;
-const adminItems = [{ href: '/users', labelKey: 'nav.users', icon: Users }] as const;
 
-export function Sidebar({ canManageUsers = false }: { canManageUsers?: boolean }) {
+export function Sidebar() {
   const pathname = usePathname();
   const { t } = useTranslation('common');
-  const items = canManageUsers ? [...baseItems, ...adminItems] : baseItems;
 
   return (
     <aside className="hidden w-60 shrink-0 border-gray-200 border-r bg-white dark:border-gray-800 dark:bg-gray-900 md:block">
