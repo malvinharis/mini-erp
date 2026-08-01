@@ -1,14 +1,15 @@
 'use client';
 
-import { Button, Dropdown, DropdownItem, Modal, Select } from '@/components/ui';
+import { Button, Dropdown, DropdownItem, Modal, Select, Spinner } from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
-import type { User, UserRole } from '@/lib/schemas';
+import useFetcher, { HttpMethod } from '@/lib/hooks/useFetcher';
+import { type User, UserRole } from '@/lib/schemas';
 import { MoreVertical } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-const ROLES = ['ADMIN', 'STAFF', 'VIEWER'] as const;
+const ROLES = [UserRole.ADMIN, UserRole.STAFF, UserRole.VIEWER] as const;
 
 interface Props {
   user: User;
@@ -20,41 +21,49 @@ export function UserRowActions({ user, isSelf }: Props) {
   const router = useRouter();
   const [roleOpen, setRoleOpen] = useState(false);
   const [role, setRole] = useState<UserRole>(user.role);
-  const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState<'role' | 'active' | 'delete' | null>(null);
+  const busy = pending !== null;
+  const { fetchData: updateUser } = useFetcher<User>({ method: HttpMethod.PATCH });
+  const { fetchData: deleteUser } = useFetcher<null>({ method: HttpMethod.DELETE });
+  // Protect the current user and any ADMIN row: hide the action menu entirely
+  // (role change / deactivate / delete are not offered for these rows).
+  const isProtected = isSelf || user.role === UserRole.ADMIN;
+  if (isProtected) return null;
 
-  async function send(method: 'PATCH' | 'DELETE', body?: unknown) {
-    setBusy(true);
-    const res = await fetch(`/api/users/${user.id}`, {
-      method,
-      headers: body ? { 'Content-Type': 'application/json' } : undefined,
-      body: body ? JSON.stringify(body) : undefined,
-    });
-    setBusy(false);
-    if (!res.ok) {
-      const err = (await res.json().catch(() => null)) as { message?: string } | null;
-      toast.error(err?.message ?? t('toast.error'));
+  async function send(action: 'role' | 'active' | 'delete', body?: Partial<User>) {
+    setPending(action);
+    try {
+      if (action === 'delete') {
+        await deleteUser({ url: `users/${user.id}` });
+      } else {
+        await updateUser({ url: `users/${user.id}`, data: body });
+      }
+      router.refresh();
+      return true;
+    } catch {
+      // useFetcher already toasts the error (showNotification defaults true).
       return false;
+    } finally {
+      setPending(null);
     }
-    router.refresh();
-    return true;
   }
 
   async function saveRole() {
-    if ((await send('PATCH', { role })) === true) {
+    if ((await send('role', { role })) === true) {
       toast.success(t('toast.updated'));
       setRoleOpen(false);
     }
   }
 
   async function toggleActive() {
-    if ((await send('PATCH', { isActive: !user.isActive })) === true) {
+    if ((await send('active', { isActive: !user.isActive })) === true) {
       toast.success(t('toast.updated'));
     }
   }
 
   async function remove() {
     if (!window.confirm(t('confirm.delete'))) return;
-    if ((await send('DELETE')) === true) toast.success(t('toast.deleted'));
+    if ((await send('delete')) === true) toast.success(t('toast.deleted'));
   }
 
   return (
@@ -67,18 +76,24 @@ export function UserRowActions({ user, isSelf }: Props) {
           </Button>
         }
       >
-        <DropdownItem disabled={isSelf} onClick={() => setRoleOpen(true)}>
+        <DropdownItem disabled={busy} onClick={() => setRoleOpen(true)}>
           {t('actions.changeRole')}
         </DropdownItem>
         <DropdownItem disabled={busy} onClick={toggleActive}>
-          {user.isActive ? t('actions.deactivate') : t('actions.activate')}
+          <span className="flex items-center gap-2">
+            {pending === 'active' && <Spinner size="sm" />}
+            {user.isActive ? t('actions.deactivate') : t('actions.activate')}
+          </span>
         </DropdownItem>
         <DropdownItem
-          disabled={isSelf || busy}
+          disabled={busy}
           className="text-danger hover:bg-danger/10 dark:text-danger"
           onClick={remove}
         >
-          {t('actions.delete')}
+          <span className="flex items-center gap-2">
+            {pending === 'delete' && <Spinner size="sm" color="danger" />}
+            {t('actions.delete')}
+          </span>
         </DropdownItem>
       </Dropdown>
 
@@ -97,6 +112,7 @@ export function UserRowActions({ user, isSelf }: Props) {
               Cancel
             </Button>
             <Button disabled={busy} onClick={saveRole}>
+              {pending === 'role' && <Spinner size="sm" className="text-current" />}
               {t('changeRole.confirm')}
             </Button>
           </div>
