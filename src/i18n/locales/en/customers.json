@@ -13,6 +13,8 @@
     "npwp": "NPWP",
     "address": "Address",
     "invoices": "Invoices",
+    "createdBy": "Created by",
+    "updatedBy": "Updated by",
     "actions": "Actions"
   },
   "actions": {

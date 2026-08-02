@@ -48,6 +48,8 @@ export default async function CustomersPage({
                 <TH>{t('fields.name')}</TH>
                 <TH>{t('fields.email')}</TH>
                 <TH>{t('fields.phone')}</TH>
+                <TH>{t('fields.createdBy')}</TH>
+                <TH>{t('fields.updatedBy')}</TH>
                 {canManage ? <TH>{t('fields.actions')}</TH> : null}
               </TR>
             </THead>
@@ -61,6 +63,8 @@ export default async function CustomersPage({
                   </TD>
                   <TD>{customer.email}</TD>
                   <TD>{customer.phone ?? '—'}</TD>
+                  <TD>{customer.createdBy?.name ?? '—'}</TD>
+                  <TD>{customer.updatedBy?.name ?? '—'}</TD>
                   {canManage ? (
                     <TD>
                       <CustomerRowActions customer={customer} />

@@ -74,6 +74,14 @@ export default async function CustomerDetailPage({
             <span className="w-24 text-gray-500 dark:text-gray-400">{t('fields.address')}</span>
             <span>{customer.address ?? '—'}</span>
           </div>
+          <div className="flex gap-2">
+            <span className="w-24 text-gray-500 dark:text-gray-400">{t('fields.createdBy')}</span>
+            <span>{customer.createdBy?.name ?? '—'}</span>
+          </div>
+          <div className="flex gap-2">
+            <span className="w-24 text-gray-500 dark:text-gray-400">{t('fields.updatedBy')}</span>
+            <span>{customer.updatedBy?.name ?? '—'}</span>
+          </div>
         </CardBody>
       </Card>
 

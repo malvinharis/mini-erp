@@ -27,6 +27,8 @@
     "issueDate": "Issued",
     "dueDate": "Due",
     "status": "Status",
+    "createdBy": "Created by",
+    "updatedBy": "Updated by",
     "total": "Total"
   },
   "form": {
@@ -70,6 +72,8 @@
     "historyEntry": "{{from}} → {{to}}",
     "createdInitial": "Created",
     "by": "by",
+    "createdBy": "Created by",
+    "updatedBy": "Updated by",
     "edit": "Edit"
   },
   "actions": {

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { createdBySchema } from './customer';
 
 /**
  * Invoices domain — mirrors backend `shared/invoice.ts`. Single source of
@@ -87,6 +88,8 @@ export const invoiceListItemSchema = z.object({
   dueDate: z.string().datetime(),
   total: z.string(),
   customer: invoiceCustomerSchema,
+  createdBy: createdBySchema.optional(),
+  updatedBy: createdBySchema.optional(),
 });
 export type InvoiceListItem = z.infer<typeof invoiceListItemSchema>;
 
