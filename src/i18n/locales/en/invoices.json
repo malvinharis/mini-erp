@@ -1,0 +1,93 @@
+{
+  "title": "Invoices",
+  "new": "New invoice",
+  "empty": "No invoices yet",
+  "emptyHint": "Create the first invoice.",
+  "emptySearch": "No invoices match your filters.",
+  "emptySearchHint": "Try a different search or filter.",
+  "searchPlaceholder": "Search number…",
+  "status": {
+    "DRAFT": "Draft",
+    "SENT": "Sent",
+    "PAID": "Paid",
+    "OVERDUE": "Overdue",
+    "CANCELLED": "Cancelled"
+  },
+  "filters": {
+    "status": "Status",
+    "allStatuses": "All statuses",
+    "customer": "Customer",
+    "allCustomers": "All customers",
+    "from": "From",
+    "to": "To"
+  },
+  "fields": {
+    "number": "No.",
+    "customer": "Customer",
+    "issueDate": "Issued",
+    "dueDate": "Due",
+    "status": "Status",
+    "total": "Total"
+  },
+  "form": {
+    "customer": "Customer",
+    "selectCustomer": "Select a customer",
+    "issueDate": "Issue date",
+    "dueDate": "Due date",
+    "tax": "PPN 11%",
+    "items": "Line items",
+    "description": "Description",
+    "quantity": "Qty",
+    "unitPrice": "Unit price",
+    "amount": "Amount",
+    "addItem": "Add item",
+    "removeItem": "Remove",
+    "subtotal": "Subtotal",
+    "taxAmount": "PPN",
+    "total": "Total",
+    "saveDraft": "Save as DRAFT",
+    "saveSend": "Save & send (SENT)",
+    "save": "Save"
+  },
+  "create": {
+    "title": "New invoice"
+  },
+  "edit": {
+    "title": "Edit invoice"
+  },
+  "detail": {
+    "back": "Back to invoices",
+    "billedTo": "Billed to",
+    "dates": "Dates",
+    "total": "Total",
+    "issueDate": "Issue date",
+    "dueDate": "Due date",
+    "subtotal": "Subtotal",
+    "taxAmount": "PPN",
+    "grandTotal": "Total",
+    "items": "Line items",
+    "history": "Status history",
+    "historyEntry": "{{from}} → {{to}}",
+    "createdInitial": "Created",
+    "by": "by",
+    "edit": "Edit"
+  },
+  "actions": {
+    "changeStatus": "Change status",
+    "cancel": "Cancel invoice"
+  },
+  "confirm": {
+    "status": "Change invoice status to {{status}}?",
+    "cancel": "Cancel this invoice? This cannot be undone."
+  },
+  "pagination": {
+    "summary": "{{count}} invoice · page {{page}} of {{totalPages}}"
+  },
+  "toast": {
+    "created": "Invoice saved",
+    "updated": "Invoice saved",
+    "statusChanged": "Invoice status updated",
+    "error": "Something went wrong"
+  },
+  "cancel": "Cancel"
+}

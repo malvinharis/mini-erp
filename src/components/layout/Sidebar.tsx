@@ -1,13 +1,14 @@
 'use client';
 import { cn } from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
-import { Contact, LayoutDashboard, Users } from 'lucide-react';
+import { Contact, FileText, LayoutDashboard, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const baseItems = [
   { href: '/', labelKey: 'nav.dashboard', icon: LayoutDashboard },
   { href: '/customers', labelKey: 'nav.customers', icon: Contact },
+  { href: '/invoices', labelKey: 'nav.invoices', icon: FileText },
 ] as const;
 const adminItems = [{ href: '/users', labelKey: 'nav.users', icon: Users }] as const;
 
