@@ -89,6 +89,8 @@ export default async function InvoicesPage({
                 <TH>{t('fields.issueDate')}</TH>
                 <TH>{t('fields.dueDate')}</TH>
                 <TH>{t('fields.status')}</TH>
+                <TH>{t('fields.createdBy')}</TH>
+                <TH>{t('fields.updatedBy')}</TH>
                 <TH>{t('fields.total')}</TH>
               </TR>
             </THead>
@@ -109,6 +111,8 @@ export default async function InvoicesPage({
                       label={t(`status.${invoice.status}`)}
                     />
                   </TD>
+                  <TD>{invoice.createdBy?.name ?? '—'}</TD>
+                  <TD>{invoice.updatedBy?.name ?? '—'}</TD>
                   <TD className="tabular-nums">{formatCurrency(invoice.total)}</TD>
                 </TR>
               ))}

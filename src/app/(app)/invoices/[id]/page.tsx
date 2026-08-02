@@ -82,6 +82,14 @@ export default async function InvoiceDetailPage({
               <span className="text-gray-500 dark:text-gray-400">{t('detail.dueDate')}</span>
               <span>{formatDate(invoice.dueDate)}</span>
             </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500 dark:text-gray-400">{t('detail.createdBy')}</span>
+              <span>{invoice.createdBy?.name ?? '—'}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500 dark:text-gray-400">{t('detail.updatedBy')}</span>
+              <span>{invoice.updatedBy?.name ?? '—'}</span>
+            </div>
           </CardBody>
         </Card>
 

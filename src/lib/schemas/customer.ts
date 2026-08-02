@@ -20,6 +20,10 @@ export type CreateCustomerInput = z.infer<typeof createCustomerSchema>;
 export const updateCustomerSchema = createCustomerSchema.partial();
 export type UpdateCustomerInput = z.infer<typeof updateCustomerSchema>;
 
+/** Minimal creator reference — the user who first created the record. */
+export const createdBySchema = z.object({ id: z.string().uuid(), name: z.string() }).nullable();
+export type CreatedBy = z.infer<typeof createdBySchema>;
+
 export const customerSchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
@@ -29,5 +33,7 @@ export const customerSchema = z.object({
   address: z.string().nullable().optional(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
+  createdBy: createdBySchema.optional(),
+  updatedBy: createdBySchema.optional(),
 });
 export type Customer = z.infer<typeof customerSchema>;

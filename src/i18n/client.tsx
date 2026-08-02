@@ -4,6 +4,7 @@ import { type ReactNode, useState } from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import common from './locales/en/common.json';
 import customers from './locales/en/customers.json';
+import dashboard from './locales/en/dashboard.json';
 import invoices from './locales/en/invoices.json';
 import users from './locales/en/users.json';
 import validation from './locales/en/validation.json';
@@ -22,8 +23,8 @@ function createClientInstance() {
     fallbackLng,
     defaultNS,
     fallbackNS: defaultNS,
-    ns: ['common', 'validation', 'users', 'customers', 'invoices'],
-    resources: { en: { common, validation, users, customers, invoices } },
+    ns: ['common', 'validation', 'users', 'customers', 'invoices', 'dashboard'],
+    resources: { en: { common, validation, users, customers, invoices, dashboard } },
     react: { useSuspense: false },
     initImmediate: false,
   });
