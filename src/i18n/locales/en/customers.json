@@ -31,6 +31,25 @@
     "contact": "Contact info",
     "edit": "Edit"
   },
+  "invoiceList": {
+    "title": "Invoices",
+    "new": "New invoice",
+    "empty": "No invoices for this customer yet.",
+    "columns": {
+      "number": "No.",
+      "issueDate": "Issued",
+      "dueDate": "Due",
+      "status": "Status",
+      "total": "Total"
+    },
+    "status": {
+      "DRAFT": "Draft",
+      "SENT": "Sent",
+      "PAID": "Paid",
+      "OVERDUE": "Overdue",
+      "CANCELLED": "Cancelled"
+    }
+  },
   "pagination": {
     "summary": "{{count}} customer · page {{page}} of {{totalPages}}"
   },
