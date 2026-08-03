@@ -23,6 +23,9 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
     cache: 'no-store',
   });
 
+  if (res.status === 429) {
+    return { error: 'Too many attempts. Wait a minute and try again.' };
+  }
   if (!res.ok) return { error: 'Invalid credentials' };
 
   const { data } = (await res.json()) as { data: TokenPair };
