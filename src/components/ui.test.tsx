@@ -1,10 +1,10 @@
-import { Badge, Button } from '@/components/ui';
+import { Badge, Button, UIColor } from '@/components/ui';
 import { render, screen } from '@testing-library/react';
 
 // Smoke tests proving RTL + jsdom + the vendored @/components/ui package render.
 describe('ui components', () => {
   it('Badge renders its children', () => {
-    render(<Badge color="success">Active</Badge>);
+    render(<Badge color={UIColor.Success}>Active</Badge>);
     expect(screen.getByText('Active')).toBeInTheDocument();
   });
 

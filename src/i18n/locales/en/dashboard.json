@@ -1,0 +1,47 @@
+{
+  "title": "Dashboard",
+  "subtitle": "Overview of your revenue, invoices and customers",
+  "actions": {
+    "refresh": "Refresh",
+    "newInvoice": "New invoice"
+  },
+  "rail": {
+    "activity": "Recent activity"
+  },
+  "overdue": {
+    "title": "Top overdue",
+    "empty": "Nothing overdue"
+  },
+  "cards": {
+    "revenuePaid": "Revenue (Paid)",
+    "outstanding": "Outstanding",
+    "overdue": "Overdue",
+    "customers": "Customers"
+  },
+  "chart": {
+    "title": "Revenue per month",
+    "revenue": "Revenue",
+    "empty": "No revenue data yet"
+  },
+  "statusCounts": {
+    "title": "Count per status"
+  },
+  "recent": {
+    "title": "Recent invoices",
+    "viewAll": "View all",
+    "empty": "No invoices yet"
+  },
+  "fields": {
+    "number": "No.",
+    "customer": "Customer",
+    "status": "Status",
+    "total": "Total"
+  },
+  "status": {
+    "DRAFT": "Draft",
+    "SENT": "Sent",
+    "PAID": "Paid",
+    "OVERDUE": "Overdue",
+    "CANCELLED": "Cancelled"
+  }
+}

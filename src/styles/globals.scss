@@ -1,12 +1,14 @@
 // Authored in Sass, compiled to globals.generated.css via `pnpm build:styles`.
 // @apply resolves once this compiled output is @imported into globals.css,
 // which is the file Tailwind's PostCSS plugin actually processes.
+// Light-only design system. We intentionally do NOT react to
+// prefers-color-scheme / data-theme="dark"; only the light theme renders.
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 body {
-  @apply bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-50;
+  @apply bg-neutral-50 text-neutral-900 antialiased;
   font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
 }
 

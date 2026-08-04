@@ -39,5 +39,6 @@
     "deleted": "User deleted",
     "error": "Something went wrong"
   },
-  "self": "You cannot change your own role or delete yourself."
+  "self": "You cannot change your own role or delete yourself.",
+  "cancel": "Cancel"
 }

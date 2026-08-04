@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button, UIColor, UIVariant } from '@/components/ui';
 import Link from 'next/link';
 
 export default function NotFound() {
@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="font-mono text-gray-500 text-sm dark:text-gray-400">404</p>
       <h1 className="font-semibold text-2xl">Page not found</h1>
       <Link href="/">
-        <Button variant="bordered" color="default">
+        <Button variant={UIVariant.Bordered} color={UIColor.Default}>
           Back to dashboard
         </Button>
       </Link>

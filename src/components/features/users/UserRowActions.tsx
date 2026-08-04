@@ -1,6 +1,17 @@
 'use client';
 
-import { Button, Dropdown, DropdownItem, Modal, Select, Spinner } from '@/components/ui';
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  Modal,
+  ModalSize,
+  Select,
+  Spinner,
+  UIColor,
+  UISize,
+  UIVariant,
+} from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
 import useFetcher, { HttpMethod } from '@/lib/hooks/useFetcher';
 import { type User, UserRole } from '@/lib/schemas';
@@ -71,7 +82,12 @@ export function UserRowActions({ user, isSelf }: Props) {
       <Dropdown
         align="end"
         trigger={
-          <Button variant="flat" color="default" size="sm" aria-label={t('actions.menu')}>
+          <Button
+            variant={UIVariant.Flat}
+            color={UIColor.Default}
+            size={UISize.Md}
+            aria-label={t('actions.menu')}
+          >
             <MoreVertical size={16} />
           </Button>
         }
@@ -81,7 +97,7 @@ export function UserRowActions({ user, isSelf }: Props) {
         </DropdownItem>
         <DropdownItem disabled={busy} onClick={toggleActive}>
           <span className="flex items-center gap-2">
-            {pending === 'active' && <Spinner size="sm" />}
+            {pending === 'active' && <Spinner size={UISize.Sm} />}
             {user.isActive ? t('actions.deactivate') : t('actions.activate')}
           </span>
         </DropdownItem>
@@ -91,13 +107,13 @@ export function UserRowActions({ user, isSelf }: Props) {
           onClick={remove}
         >
           <span className="flex items-center gap-2">
-            {pending === 'delete' && <Spinner size="sm" color="danger" />}
+            {pending === 'delete' && <Spinner size={UISize.Sm} color={UIColor.Danger} />}
             {t('actions.delete')}
           </span>
         </DropdownItem>
       </Dropdown>
 
-      <Modal open={roleOpen} onClose={() => setRoleOpen(false)} size="sm">
+      <Modal open={roleOpen} onClose={() => setRoleOpen(false)} size={ModalSize.Sm}>
         <div className="flex flex-col gap-4">
           <h2 className="font-semibold text-lg">{t('changeRole.title')}</h2>
           <Select value={role} onChange={(e) => setRole(e.target.value as UserRole)}>
@@ -108,11 +124,15 @@ export function UserRowActions({ user, isSelf }: Props) {
             ))}
           </Select>
           <div className="flex justify-end gap-2">
-            <Button variant="bordered" color="default" onClick={() => setRoleOpen(false)}>
+            <Button
+              variant={UIVariant.Bordered}
+              color={UIColor.Default}
+              onClick={() => setRoleOpen(false)}
+            >
               Cancel
             </Button>
             <Button disabled={busy} onClick={saveRole}>
-              {pending === 'role' && <Spinner size="sm" className="text-current" />}
+              {pending === 'role' && <Spinner size={UISize.Sm} className="text-current" />}
               {t('changeRole.confirm')}
             </Button>
           </div>

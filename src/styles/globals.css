@@ -7,3 +7,8 @@
 @import "tailwindcss";
 @import "./globals.generated.css";
 @config "../../tailwind.config.ts";
+
+/* Light-only app: bind `dark:` to an explicit [data-theme="dark"] selector
+   (which nothing sets) instead of the default prefers-color-scheme media
+   query, so dormant `dark:` utilities never trigger on an OS in dark mode. */
+@custom-variant dark ([data-theme="dark"] &);

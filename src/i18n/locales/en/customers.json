@@ -1,0 +1,75 @@
+{
+  "title": "Customers",
+  "new": "New customer",
+  "searchPlaceholder": "Search name / email…",
+  "empty": "No customers yet",
+  "emptyHint": "Create the first customer.",
+  "emptySearch": "No customers match your search.",
+  "emptySearchHint": "Try a different name or email.",
+  "fields": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "npwp": "NPWP",
+    "address": "Address",
+    "invoices": "Invoices",
+    "createdBy": "Created by",
+    "updatedBy": "Updated by",
+    "actions": "Actions"
+  },
+  "toolbar": {
+    "searchFilter": "Search Filter"
+  },
+  "actions": {
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "menu": "Row actions",
+    "refresh": "Refresh",
+    "brief": "Print"
+  },
+  "create": {
+    "title": "New customer",
+    "submit": "Save"
+  },
+  "edit": {
+    "title": "Edit customer",
+    "submit": "Save"
+  },
+  "detail": {
+    "contact": "Contact info",
+    "edit": "Edit"
+  },
+  "invoiceList": {
+    "title": "Invoices",
+    "new": "New invoice",
+    "empty": "No invoices for this customer yet.",
+    "columns": {
+      "number": "No.",
+      "issueDate": "Issued",
+      "dueDate": "Due",
+      "status": "Status",
+      "total": "Total"
+    },
+    "status": {
+      "DRAFT": "Draft",
+      "SENT": "Sent",
+      "PAID": "Paid",
+      "OVERDUE": "Overdue",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "pagination": {
+    "summary": "{{count}} customer · page {{page}} of {{totalPages}}"
+  },
+  "confirm": {
+    "delete": "Delete this customer? This soft-deletes the record."
+  },
+  "toast": {
+    "created": "Customer saved",
+    "updated": "Customer saved",
+    "deleted": "Customer deleted",
+    "error": "Something went wrong"
+  },
+  "cancel": "Cancel"
+}

@@ -2,20 +2,20 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import type { TextareaHTMLAttributes } from 'react';
 import { cn } from '../lib/cn';
-import { fieldStateVariants } from '../lib/variants';
+import { UIColor, UISize, fieldStateVariants } from '../lib/variants';
 
 const textarea = cva(
-  'w-full rounded-lg border bg-white text-gray-900 placeholder:text-gray-400 transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-900 dark:text-gray-50 dark:placeholder:text-gray-500',
+  'w-full rounded-xl border bg-white text-neutral-900 placeholder:text-neutral-400 transition-colors duration-150 ease-out  disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-900 dark:text-gray-50 dark:placeholder:text-gray-500',
   {
     variants: {
       color: fieldStateVariants,
       size: {
-        sm: 'px-2.5 py-2 text-sm',
-        md: 'px-3 py-2.5 text-sm',
-        lg: 'px-4 py-3 text-base',
+        [UISize.Sm]: 'px-2.5 py-2 text-sm',
+        [UISize.Md]: 'px-3 py-2.5 text-sm',
+        [UISize.Lg]: 'px-4 py-3 text-base',
       },
     },
-    defaultVariants: { color: 'default', size: 'md' },
+    defaultVariants: { color: UIColor.Default, size: UISize.Md },
   },
 );
 

@@ -1,4 +1,5 @@
 import { cn } from '../lib/cn';
+import { UIColor, UISize, UIVariant } from '../lib/variants';
 import { Button } from './Button';
 
 export interface PaginationProps {
@@ -15,21 +16,21 @@ export function Pagination({ page, totalPages, onPageChange, className }: Pagina
       className={cn('flex items-center justify-between gap-4', className)}
     >
       <Button
-        variant="bordered"
-        color="default"
-        size="sm"
+        variant={UIVariant.Bordered}
+        color={UIColor.Default}
+        size={UISize.Md}
         disabled={page <= 1}
         onClick={() => onPageChange(page - 1)}
       >
         Previous
       </Button>
-      <span className="text-gray-500 text-sm dark:text-gray-400">
+      <span className="text-neutral-500 text-sm">
         Page {page} of {totalPages}
       </span>
       <Button
-        variant="bordered"
-        color="default"
-        size="sm"
+        variant={UIVariant.Bordered}
+        color={UIColor.Default}
+        size={UISize.Md}
         disabled={page >= totalPages}
         onClick={() => onPageChange(page + 1)}
       >

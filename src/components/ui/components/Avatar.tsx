@@ -2,20 +2,21 @@
 
 import { useState } from 'react';
 import { cn } from '../lib/cn';
+import { AvatarSize } from '../lib/variants';
 
 export interface AvatarProps {
   src?: string;
   name?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: AvatarSize;
   ring?: boolean;
   className?: string;
 }
 
-const sizeClasses: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
-  sm: 'h-8 w-8 text-xs',
-  md: 'h-10 w-10 text-sm',
-  lg: 'h-14 w-14 text-lg',
-  xl: 'h-20 w-20 text-2xl',
+const sizeClasses: Record<AvatarSize, string> = {
+  [AvatarSize.Sm]: 'h-8 w-8 text-xs',
+  [AvatarSize.Md]: 'h-10 w-10 text-sm',
+  [AvatarSize.Lg]: 'h-14 w-14 text-lg',
+  [AvatarSize.Xl]: 'h-20 w-20 text-2xl',
 };
 
 function initials(name: string): string {
@@ -25,7 +26,13 @@ function initials(name: string): string {
   return `${first}${last}`.toUpperCase();
 }
 
-export function Avatar({ src, name = '', size = 'md', ring = false, className }: AvatarProps) {
+export function Avatar({
+  src,
+  name = '',
+  size = AvatarSize.Md,
+  ring = false,
+  className,
+}: AvatarProps) {
   const [errored, setErrored] = useState(false);
   const showImage = Boolean(src) && !errored;
 
