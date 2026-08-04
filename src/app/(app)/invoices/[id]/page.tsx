@@ -11,6 +11,9 @@ import {
   THead,
   TR,
   Table,
+  UIColor,
+  UISize,
+  UIVariant,
 } from '@/components/ui';
 import { getT } from '@/i18n/server';
 import { getInvoice } from '@/lib/api/invoices';
@@ -38,18 +41,21 @@ export default async function InvoiceDetailPage({
   return (
     <section className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <Link
-          href="/invoices"
-          className="flex items-center gap-2 font-semibold text-2xl hover:underline"
-        >
-          <ArrowLeft size={20} />
-          {invoice.number}
-        </Link>
         <div className="flex items-center gap-3">
-          <InvoiceStatusBadge status={invoice.status} label={t(`status.${invoice.status}`)} />
+          <Link href="/invoices" className="flex items-center gap-2 font-semibold text-2xl">
+            <ArrowLeft size={20} />
+            {invoice.number}
+          </Link>
+          <InvoiceStatusBadge
+            status={invoice.status}
+            label={t(`status.${invoice.status}`)}
+            className="flex h-10 items-center px-3 text-sm"
+          />
+        </div>
+        <div className="flex items-center gap-3">
           {canEdit ? (
             <Link href={`/invoices/${invoice.id}/edit`}>
-              <Button variant="bordered" color="default">
+              <Button variant={UIVariant.Bordered} color={UIColor.Default} size={UISize.Md}>
                 {t('detail.edit')}
               </Button>
             </Link>

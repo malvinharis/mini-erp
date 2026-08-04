@@ -1,9 +1,10 @@
 import { CustomerRowActions } from '@/components/features/customers/CustomerRowActions';
 import { CustomerSearch } from '@/components/features/customers/CustomerSearch';
-import { Button, EmptyState, TD, TH, THead, TR, Table } from '@/components/ui';
+import { Badge, Button, DataTable, type DataTableColumn, UIColor, UISize } from '@/components/ui';
 import { getT } from '@/i18n/server';
 import { listCustomers } from '@/lib/api/customers';
 import { can, getCurrentUser } from '@/lib/auth/rbac';
+import type { Customer } from '@/lib/schemas';
 import Link from 'next/link';
 
 export default async function CustomersPage({
@@ -21,96 +22,82 @@ export default async function CustomersPage({
 
   const newCustomerButton = canManage ? (
     <Link href="/customers/new">
-      <Button>{t('new')}</Button>
+      <Button size={UISize.Md}>{t('new')}</Button>
     </Link>
   ) : null;
 
+  const columns: DataTableColumn<Customer>[] = [
+    { key: 'name', header: t('fields.name'), render: (c) => c.name },
+    { key: 'email', header: t('fields.email'), render: (c) => c.email },
+    { key: 'phone', header: t('fields.phone'), render: (c) => c.phone ?? '—' },
+    {
+      key: 'createdBy',
+      header: t('fields.createdBy'),
+      render: (c) =>
+        c.createdBy?.name ? (
+          <Badge color={UIColor.Default}>{c.createdBy.name}</Badge>
+        ) : (
+          <span className="text-neutral-400">—</span>
+        ),
+    },
+    {
+      key: 'updatedBy',
+      header: t('fields.updatedBy'),
+      render: (c) =>
+        c.updatedBy?.name ? (
+          <Badge color={UIColor.Primary}>{c.updatedBy.name}</Badge>
+        ) : (
+          <span className="text-neutral-400">—</span>
+        ),
+    },
+    ...(canManage
+      ? [
+          {
+            key: 'actions',
+            header: t('fields.actions'),
+            hint: false,
+            align: 'right',
+            className: 'w-12',
+            render: (c: Customer) => <CustomerRowActions customer={c} />,
+          } satisfies DataTableColumn<Customer>,
+        ]
+      : []),
+  ];
+
   return (
     <section className="flex flex-col gap-5">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-6">
         <h1 className="font-semibold text-2xl">{t('title')}</h1>
-        {newCustomerButton}
+        <div className="flex flex-wrap items-center gap-2">
+          <CustomerSearch />
+        </div>
+        <div className="ml-auto">{newCustomerButton}</div>
       </div>
 
-      <CustomerSearch />
-
-      {rows.length === 0 ? (
-        <EmptyState
-          title={search ? t('emptySearch') : t('empty')}
-          description={search ? t('emptySearchHint') : t('emptyHint')}
-          action={search ? undefined : newCustomerButton}
-        />
-      ) : (
-        <>
-          <Table>
-            <THead>
-              <TR>
-                <TH>{t('fields.name')}</TH>
-                <TH>{t('fields.email')}</TH>
-                <TH>{t('fields.phone')}</TH>
-                <TH>{t('fields.createdBy')}</TH>
-                <TH>{t('fields.updatedBy')}</TH>
-                {canManage ? <TH>{t('fields.actions')}</TH> : null}
-              </TR>
-            </THead>
-            <tbody>
-              {rows.map((customer) => (
-                <TR key={customer.id}>
-                  <TD>
-                    <Link href={`/customers/${customer.id}`} className="hover:underline">
-                      {customer.name}
-                    </Link>
-                  </TD>
-                  <TD>{customer.email}</TD>
-                  <TD>{customer.phone ?? '—'}</TD>
-                  <TD>{customer.createdBy?.name ?? '—'}</TD>
-                  <TD>{customer.updatedBy?.name ?? '—'}</TD>
-                  {canManage ? (
-                    <TD>
-                      <CustomerRowActions customer={customer} />
-                    </TD>
-                  ) : null}
-                </TR>
-              ))}
-            </tbody>
-          </Table>
-
-          {meta && meta.totalPages > 1 ? (
-            <nav aria-label="Pagination" className="flex items-center justify-between">
-              <span className="text-gray-500 text-sm dark:text-gray-400">
-                {t('pagination.summary', {
+      <DataTable
+        columns={columns}
+        data={rows}
+        getRowKey={(c) => c.id}
+        empty={{
+          title: search ? t('emptySearch') : t('empty'),
+          description: search ? t('emptySearchHint') : t('emptyHint'),
+          action: search ? undefined : newCustomerButton,
+        }}
+        pagination={
+          meta
+            ? {
+                page,
+                totalPages: meta.totalPages,
+                buildHref: (p) => `/customers?page=${p}${search ? `&search=${search}` : ''}`,
+                summary: t('pagination.summary', {
                   count: meta.total,
                   page: meta.page,
                   totalPages: meta.totalPages,
-                })}
-              </span>
-              <div className="flex gap-2">
-                <Link
-                  href={`/customers?page=${page - 1}${search ? `&search=${search}` : ''}`}
-                  aria-disabled={page <= 1}
-                >
-                  <Button variant="bordered" color="default" size="sm" disabled={page <= 1}>
-                    Previous
-                  </Button>
-                </Link>
-                <Link
-                  href={`/customers?page=${page + 1}${search ? `&search=${search}` : ''}`}
-                  aria-disabled={page >= meta.totalPages}
-                >
-                  <Button
-                    variant="bordered"
-                    color="default"
-                    size="sm"
-                    disabled={page >= meta.totalPages}
-                  >
-                    Next
-                  </Button>
-                </Link>
-              </div>
-            </nav>
-          ) : null}
-        </>
-      )}
+                }),
+              }
+            : undefined
+        }
+      />
     </section>
   );
 }

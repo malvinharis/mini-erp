@@ -22,19 +22,30 @@ export interface DropdownProps {
   className?: string;
 }
 
+interface Position {
+  top: number;
+  left?: number;
+  right?: number;
+}
+
 export function Dropdown({ trigger, children, align = 'start', className }: DropdownProps) {
   const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
   const triggerRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   const openMenu = () => {
     const rect = triggerRef.current?.getBoundingClientRect();
     if (rect) {
-      setPosition({
-        top: rect.bottom + window.scrollY + 4,
-        left: (align === 'end' ? rect.right : rect.left) + window.scrollX,
-      });
+      const top = rect.bottom + window.scrollY + 4;
+      // `right`-anchored (not `left` + transform) so the panel's right edge
+      // stays pinned to the trigger and never overflows the viewport edge —
+      // it grows leftward regardless of how wide its content ends up being.
+      setPosition(
+        align === 'end'
+          ? { top, right: document.documentElement.clientWidth - rect.right - window.scrollX }
+          : { top, left: rect.left + window.scrollX },
+      );
     }
     setOpen(true);
   };
@@ -122,10 +133,10 @@ export function Dropdown({ trigger, children, align = 'start', className }: Drop
                     position: 'absolute',
                     top: position.top,
                     left: position.left,
-                    transform: align === 'end' ? 'translateX(-100%)' : undefined,
+                    right: position.right,
                   }}
                   className={cn(
-                    'z-50 min-w-40 rounded-xl border border-gray-200 bg-white p-1 shadow-lg dark:border-gray-800 dark:bg-gray-900',
+                    'z-50 min-w-40 rounded-xl border border-neutral-200 bg-white p-1 shadow-[0_10px_40px_rgba(0,0,0,0.12)]',
                     className,
                   )}
                 >
@@ -147,7 +158,7 @@ export function DropdownItem({ className, ...props }: ButtonHTMLAttributes<HTMLB
       role="menuitem"
       tabIndex={-1}
       className={cn(
-        'w-full rounded-lg px-3 py-2 text-left text-gray-700 text-sm transition-colors duration-150 hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none dark:text-gray-200 dark:hover:bg-gray-800 dark:focus-visible:bg-gray-800',
+        'w-full rounded-lg px-3 py-2 text-left text-neutral-700 text-sm transition-colors duration-150 hover:bg-neutral-100 focus-visible:bg-neutral-100 focus-visible:outline-none',
         className,
       )}
       {...props}

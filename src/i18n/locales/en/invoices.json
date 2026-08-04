@@ -5,7 +5,7 @@
   "emptyHint": "Create the first invoice.",
   "emptySearch": "No invoices match your filters.",
   "emptySearchHint": "Try a different search or filter.",
-  "searchPlaceholder": "Search number…",
+  "searchPlaceholder": "Search number or customer…",
   "status": {
     "DRAFT": "Draft",
     "SENT": "Sent",
@@ -18,8 +18,11 @@
     "allStatuses": "All statuses",
     "customer": "Customer",
     "allCustomers": "All customers",
-    "from": "From",
-    "to": "To"
+    "from": "Start date",
+    "to": "End date"
+  },
+  "toolbar": {
+    "searchFilter": "Search Filter"
   },
   "fields": {
     "number": "No.",
@@ -29,7 +32,8 @@
     "status": "Status",
     "createdBy": "Created by",
     "updatedBy": "Updated by",
-    "total": "Total"
+    "total": "Total",
+    "actions": "Actions"
   },
   "form": {
     "customer": "Customer",
@@ -78,7 +82,13 @@
   },
   "actions": {
     "changeStatus": "Change status",
-    "cancel": "Cancel invoice"
+    "cancel": "Cancel invoice",
+    "menu": "Row actions",
+    "view": "View",
+    "edit": "Edit",
+    "refresh": "Refresh",
+    "search": "Search",
+    "brief": "Print"
   },
   "confirm": {
     "status": "Change invoice status to {{status}}?",

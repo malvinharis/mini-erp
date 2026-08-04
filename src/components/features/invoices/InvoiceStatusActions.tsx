@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Spinner } from '@/components/ui';
+import { Button, Spinner, UIColor, UISize, UIVariant } from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
 import useFetcher, { HttpMethod } from '@/lib/hooks/useFetcher';
 import { INVOICE_TRANSITIONS, type Invoice, InvoiceStatus } from '@/lib/schemas';
@@ -52,14 +52,16 @@ export function InvoiceStatusActions({ invoice, canManage, isAdmin }: Props) {
         return (
           <Button
             key={status}
-            variant={isCancel ? 'flat' : 'solid'}
-            color={isCancel ? 'danger' : 'primary'}
-            size="sm"
+            variant={isCancel ? UIVariant.Flat : UIVariant.Solid}
+            color={isCancel ? UIColor.Danger : UIColor.Primary}
+            size={UISize.Md}
             disabled={pending !== null}
             onClick={() => transition(status)}
             className="flex items-center gap-2"
           >
-            {pending === status && <Spinner size="sm" color={isCancel ? 'danger' : undefined} />}
+            {pending === status && (
+              <Spinner size={UISize.Sm} color={isCancel ? UIColor.Danger : undefined} />
+            )}
             {isCancel ? t('actions.cancel') : t(`status.${status}`)}
           </Button>
         );

@@ -1,11 +1,12 @@
 {
-  "app": { "name": "mini-erp" },
+  "app": { "name": "Mini ERP" },
   "nav": {
     "dashboard": "Dashboard",
     "customers": "Customers",
     "invoices": "Invoices",
     "users": "Users",
-    "logout": "Log out"
+    "logout": "Log out",
+    "search": "Search customers, invoices..."
   },
   "dashboard": { "welcome": "Welcome, {{name}}" },
   "auth": {

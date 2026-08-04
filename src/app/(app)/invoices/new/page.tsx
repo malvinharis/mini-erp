@@ -1,4 +1,5 @@
 import { InvoiceForm } from '@/components/features/invoices/InvoiceForm';
+import { Card, CardBody } from '@/components/ui';
 import { getT } from '@/i18n/server';
 import { listCustomers } from '@/lib/api/customers';
 import { can, getCurrentUser } from '@/lib/auth/rbac';
@@ -19,7 +20,11 @@ export default async function NewInvoicePage({
   return (
     <section className="flex flex-col gap-5">
       <h1 className="font-semibold text-2xl">{t('create.title')}</h1>
-      <InvoiceForm customers={customers} defaultCustomerId={customerId} />
+      <Card className="max-w-3xl rounded-2xl">
+        <CardBody>
+          <InvoiceForm customers={customers} defaultCustomerId={customerId} />
+        </CardBody>
+      </Card>
     </section>
   );
 }

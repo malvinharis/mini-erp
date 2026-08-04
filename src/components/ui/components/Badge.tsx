@@ -1,16 +1,16 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
 import { cn } from '../lib/cn';
-import { type UIColor, type UIVariant, colorVariants } from '../lib/variants';
+import { UIColor, UISize, UIVariant, colorVariants } from '../lib/variants';
 
 const badge = cva('inline-flex items-center rounded-full font-medium', {
   variants: {
     size: {
-      sm: 'px-2 py-0.5 text-xs',
-      md: 'px-2.5 py-1 text-xs',
+      [UISize.Sm]: 'px-2 py-0.5 text-xs',
+      [UISize.Md]: 'px-2.5 py-1 text-xs',
     },
   },
-  defaultVariants: { size: 'md' },
+  defaultVariants: { size: UISize.Md },
 });
 
 export interface BadgeProps
@@ -22,8 +22,8 @@ export interface BadgeProps
 
 export function Badge({
   className,
-  variant = 'flat',
-  color = 'default',
+  variant = UIVariant.Flat,
+  color = UIColor.Default,
   size,
   ...props
 }: BadgeProps) {

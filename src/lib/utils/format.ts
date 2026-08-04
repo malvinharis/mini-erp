@@ -1,8 +1,9 @@
 import { format } from 'date-fns';
 
-const currency = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+// Indonesian grouping (dot thousands separator), plain number — no currency
+// symbol, no decimals.
+const currency = new Intl.NumberFormat('id-ID', {
+  maximumFractionDigits: 0,
 });
 
 export function formatCurrency(value: number | string): string {

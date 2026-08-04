@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Input, Select, Spinner } from '@/components/ui';
+import { Button, Input, Select, Spinner, UIColor, UISize, UIVariant } from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
 import useFetcher, { HttpMethod } from '@/lib/hooks/useFetcher';
 import {
@@ -109,7 +109,10 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <label className="flex flex-col gap-1 text-sm">
           {t('form.customer')}
-          <Select {...register('customerId')} color={errors.customerId ? 'danger' : 'default'}>
+          <Select
+            {...register('customerId')}
+            color={errors.customerId ? UIColor.Danger : UIColor.Default}
+          >
             <option value="">{t('form.selectCustomer')}</option>
             {customers.map((c) => (
               <option key={c.id} value={c.id}>
@@ -127,7 +130,7 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
           <Input
             type="date"
             {...register('issueDate')}
-            color={errors.issueDate ? 'danger' : 'default'}
+            color={errors.issueDate ? UIColor.Danger : UIColor.Default}
           />
           {errors.issueDate && (
             <span className="text-danger text-xs">{errors.issueDate.message}</span>
@@ -139,7 +142,7 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
           <Input
             type="date"
             {...register('dueDate')}
-            color={errors.dueDate ? 'danger' : 'default'}
+            color={errors.dueDate ? UIColor.Danger : UIColor.Default}
           />
           {errors.dueDate && <span className="text-danger text-xs">{errors.dueDate.message}</span>}
         </label>
@@ -150,9 +153,9 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
           <span className="font-medium text-sm">{t('form.items')}</span>
           <Button
             type="button"
-            variant="flat"
-            color="default"
-            size="sm"
+            variant={UIVariant.Flat}
+            color={UIColor.Default}
+            size={UISize.Md}
             onClick={() => append(EMPTY_ITEM)}
           >
             {t('form.addItem')}
@@ -169,7 +172,7 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
                   {index === 0 ? t('form.description') : null}
                   <Input
                     {...register(`items.${index}.description` as const)}
-                    color={errors.items?.[index]?.description ? 'danger' : 'default'}
+                    color={errors.items?.[index]?.description ? UIColor.Danger : UIColor.Default}
                   />
                 </label>
                 <label className="flex w-24 flex-col gap-1 text-sm">
@@ -178,7 +181,7 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
                     type="number"
                     step="any"
                     {...register(`items.${index}.quantity` as const)}
-                    color={errors.items?.[index]?.quantity ? 'danger' : 'default'}
+                    color={errors.items?.[index]?.quantity ? UIColor.Danger : UIColor.Default}
                   />
                 </label>
                 <label className="flex w-32 flex-col gap-1 text-sm">
@@ -187,7 +190,7 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
                     type="number"
                     step="any"
                     {...register(`items.${index}.unitPrice` as const)}
-                    color={errors.items?.[index]?.unitPrice ? 'danger' : 'default'}
+                    color={errors.items?.[index]?.unitPrice ? UIColor.Danger : UIColor.Default}
                   />
                 </label>
                 <div className="flex w-28 flex-col gap-1 text-sm">
@@ -200,13 +203,12 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
                   {index === 0 ? <span className="text-sm">&nbsp;</span> : null}
                   <Button
                     type="button"
-                    variant="flat"
-                    color="danger"
-                    size="sm"
+                    variant={UIVariant.Flat}
+                    color={UIColor.Danger}
+                    size={UISize.Md}
                     aria-label={t('form.removeItem')}
                     disabled={fields.length <= 1}
                     onClick={() => remove(index)}
-                    className="h-10"
                   >
                     <Trash2 size={16} />
                   </Button>
@@ -245,25 +247,30 @@ export function InvoiceForm({ invoice, customers, defaultCustomerId }: Props) {
       <div className="flex justify-end gap-2">
         <Button
           type="button"
-          variant="bordered"
-          color="default"
+          variant={UIVariant.Bordered}
+          color={UIColor.Default}
           onClick={() => router.push('/invoices')}
         >
           {t('cancel')}
         </Button>
         {isEdit ? (
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting && <Spinner size="sm" className="text-current" />}
+            {isSubmitting && <Spinner size={UISize.Sm} className="text-current" />}
             {t('form.save')}
           </Button>
         ) : (
           <>
-            <Button type="submit" variant="bordered" color="primary" disabled={isSubmitting}>
-              {isSubmitting && <Spinner size="sm" className="text-current" />}
+            <Button
+              type="submit"
+              variant={UIVariant.Bordered}
+              color={UIColor.Primary}
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <Spinner size={UISize.Sm} className="text-current" />}
               {t('form.saveDraft')}
             </Button>
             <Button type="button" onClick={submitSent} disabled={isSubmitting}>
-              {isSubmitting && <Spinner size="sm" className="text-current" />}
+              {isSubmitting && <Spinner size={UISize.Sm} className="text-current" />}
               {t('form.saveSend')}
             </Button>
           </>

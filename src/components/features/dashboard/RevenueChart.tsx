@@ -27,9 +27,11 @@ export function RevenueChart({ data }: Props) {
       {
         label: t('chart.revenue'),
         data: data.map((point) => Number(point.total)),
-        backgroundColor: '#6366f1',
-        borderRadius: 4,
-        maxBarThickness: 48,
+        backgroundColor: '#2dd4bf', // teal-400
+        hoverBackgroundColor: '#14b8a6', // teal-500
+        borderRadius: 8,
+        borderSkipped: false,
+        maxBarThickness: 44,
       },
     ],
   };
@@ -46,9 +48,16 @@ export function RevenueChart({ data }: Props) {
       },
     },
     scales: {
-      x: { grid: { display: false } },
+      x: {
+        grid: { display: false },
+        border: { display: false },
+        ticks: { color: '#737373' },
+      },
       y: {
+        grid: { color: '#f5f5f5' },
+        border: { display: false },
         ticks: {
+          color: '#737373',
           callback: (value) => formatCurrency(Number(value)),
         },
       },

@@ -18,9 +18,9 @@ export function Sidebar({ canManageUsers = false }: { canManageUsers?: boolean }
   const items = canManageUsers ? [...baseItems, ...adminItems] : baseItems;
 
   return (
-    <aside className="hidden w-60 shrink-0 border-gray-200 border-r bg-white dark:border-gray-800 dark:bg-gray-900 md:block">
-      <div className="px-5 py-4 font-semibold text-lg">{t('app.name')}</div>
-      <nav aria-label="Main navigation" className="flex flex-col gap-1 px-3">
+    <aside className="hidden w-60 shrink-0 border-neutral-200 border-r bg-white md:block">
+      <div className="px-6 py-5 font-semibold text-lg text-neutral-900">{t('app.name')}</div>
+      <nav aria-label="Main navigation" className="flex flex-col gap-1 px-4">
         {items.map(({ href, labelKey, icon: Icon }) => {
           const active = href === '/' ? pathname === '/' : pathname.startsWith(href);
           return (
@@ -28,10 +28,10 @@ export function Sidebar({ canManageUsers = false }: { canManageUsers?: boolean }
               key={href}
               href={href}
               className={cn(
-                'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
+                'flex items-center gap-3 rounded-full px-4 py-2.5 font-medium text-sm transition-colors',
                 active
-                  ? 'bg-blue-600 text-white dark:bg-blue-500'
-                  : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800',
+                  ? 'bg-primary-100 text-primary-700'
+                  : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900',
               )}
             >
               <Icon size={18} />

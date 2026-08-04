@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Input, Spinner, Textarea } from '@/components/ui';
+import { Button, Input, Spinner, Textarea, UIColor, UISize, UIVariant } from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
 import useFetcher, { HttpMethod } from '@/lib/hooks/useFetcher';
 import {
@@ -70,47 +70,54 @@ export function CustomerForm({ customer }: Props) {
     <form onSubmit={onSubmit} className="flex max-w-2xl flex-col gap-4">
       <label className="flex flex-col gap-1 text-sm">
         {t('fields.name')}
-        <Input {...register('name')} color={errors.name ? 'danger' : 'default'} />
+        <Input {...register('name')} color={errors.name ? UIColor.Danger : UIColor.Default} />
         {errors.name && <span className="text-danger text-xs">{errors.name.message}</span>}
       </label>
 
       <label className="flex flex-col gap-1 text-sm">
         {t('fields.email')}
-        <Input type="email" {...register('email')} color={errors.email ? 'danger' : 'default'} />
+        <Input
+          type="email"
+          {...register('email')}
+          color={errors.email ? UIColor.Danger : UIColor.Default}
+        />
         {errors.email && <span className="text-danger text-xs">{errors.email.message}</span>}
       </label>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <label className="flex flex-col gap-1 text-sm">
           {t('fields.phone')}
-          <Input {...register('phone')} color={errors.phone ? 'danger' : 'default'} />
+          <Input {...register('phone')} color={errors.phone ? UIColor.Danger : UIColor.Default} />
           {errors.phone && <span className="text-danger text-xs">{errors.phone.message}</span>}
         </label>
 
         <label className="flex flex-col gap-1 text-sm">
           {t('fields.npwp')}
-          <Input {...register('npwp')} color={errors.npwp ? 'danger' : 'default'} />
+          <Input {...register('npwp')} color={errors.npwp ? UIColor.Danger : UIColor.Default} />
           {errors.npwp && <span className="text-danger text-xs">{errors.npwp.message}</span>}
         </label>
       </div>
 
       <label className="flex flex-col gap-1 text-sm">
         {t('fields.address')}
-        <Textarea {...register('address')} color={errors.address ? 'danger' : 'default'} />
+        <Textarea
+          {...register('address')}
+          color={errors.address ? UIColor.Danger : UIColor.Default}
+        />
         {errors.address && <span className="text-danger text-xs">{errors.address.message}</span>}
       </label>
 
       <div className="flex justify-end gap-2">
         <Button
           type="button"
-          variant="bordered"
-          color="default"
+          variant={UIVariant.Bordered}
+          color={UIColor.Default}
           onClick={() => router.push('/customers')}
         >
           {t('cancel')}
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting && <Spinner size="sm" className="text-current" />}
+          {isSubmitting && <Spinner size={UISize.Sm} className="text-current" />}
           {isEdit ? t('edit.submit') : t('create.submit')}
         </Button>
       </div>

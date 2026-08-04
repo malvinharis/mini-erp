@@ -11,6 +11,7 @@ import {
   THead,
   TR,
   Table,
+  UISize,
 } from '@/components/ui';
 import { getT } from '@/i18n/server';
 import { getCustomer } from '@/lib/api/customers';
@@ -39,16 +40,13 @@ export default async function CustomerDetailPage({
   return (
     <section className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <Link
-          href="/customers"
-          className="flex items-center gap-2 font-semibold text-2xl hover:underline"
-        >
+        <Link href="/customers" className="flex items-center gap-2 font-semibold text-2xl">
           <ArrowLeft size={20} />
           {customer.name}
         </Link>
         {canManage ? (
           <Link href={`/customers/${customer.id}/edit`}>
-            <Button>{t('detail.edit')}</Button>
+            <Button size={UISize.Md}>{t('detail.edit')}</Button>
           </Link>
         ) : null}
       </div>
@@ -90,7 +88,7 @@ export default async function CustomerDetailPage({
           <CardTitle>{t('invoiceList.title')}</CardTitle>
           {canManageInvoices ? (
             <Link href={`/invoices/new?customerId=${customer.id}`}>
-              <Button size="sm">{t('invoiceList.new')}</Button>
+              <Button size={UISize.Md}>{t('invoiceList.new')}</Button>
             </Link>
           ) : null}
         </CardHeader>

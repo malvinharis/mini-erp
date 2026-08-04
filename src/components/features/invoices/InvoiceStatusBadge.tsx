@@ -1,26 +1,31 @@
-import { Badge, type UIColor, type UIVariant } from '@/components/ui';
+import { Badge, UIColor, UIVariant, cn } from '@/components/ui';
 import { InvoiceStatus } from '@/lib/schemas';
 
 interface Props {
   status: InvoiceStatus;
   label: string;
+  className?: string;
 }
 
 const STATUS_STYLE: Record<
   InvoiceStatus,
   { variant: UIVariant; color: UIColor; className?: string }
 > = {
-  [InvoiceStatus.DRAFT]: { variant: 'bordered', color: 'default' },
-  [InvoiceStatus.SENT]: { variant: 'flat', color: 'default' },
-  [InvoiceStatus.PAID]: { variant: 'flat', color: 'success' },
-  [InvoiceStatus.OVERDUE]: { variant: 'flat', color: 'warning' },
-  [InvoiceStatus.CANCELLED]: { variant: 'flat', color: 'default', className: 'line-through' },
+  [InvoiceStatus.DRAFT]: { variant: UIVariant.Bordered, color: UIColor.Default },
+  [InvoiceStatus.SENT]: { variant: UIVariant.Flat, color: UIColor.Primary },
+  [InvoiceStatus.PAID]: { variant: UIVariant.Flat, color: UIColor.Success },
+  [InvoiceStatus.OVERDUE]: { variant: UIVariant.Flat, color: UIColor.Warning },
+  [InvoiceStatus.CANCELLED]: {
+    variant: UIVariant.Flat,
+    color: UIColor.Default,
+    className: 'line-through',
+  },
 };
 
-export function InvoiceStatusBadge({ status, label }: Props) {
+export function InvoiceStatusBadge({ status, label, className }: Props) {
   const style = STATUS_STYLE[status];
   return (
-    <Badge variant={style.variant} color={style.color} className={style.className}>
+    <Badge variant={style.variant} color={style.color} className={cn(style.className, className)}>
       {label}
     </Badge>
   );

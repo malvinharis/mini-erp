@@ -17,9 +17,16 @@
     "updatedBy": "Updated by",
     "actions": "Actions"
   },
+  "toolbar": {
+    "searchFilter": "Search Filter"
+  },
   "actions": {
+    "view": "View",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "menu": "Row actions",
+    "refresh": "Refresh",
+    "brief": "Print"
   },
   "create": {
     "title": "New customer",

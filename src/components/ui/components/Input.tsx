@@ -2,20 +2,20 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import type { InputHTMLAttributes } from 'react';
 import { cn } from '../lib/cn';
-import { fieldStateVariants } from '../lib/variants';
+import { UIColor, UISize, fieldStateVariants } from '../lib/variants';
 
 const input = cva(
-  'w-full rounded-lg border bg-white text-gray-900 placeholder:text-gray-400 transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-900 dark:text-gray-50 dark:placeholder:text-gray-500',
+  'w-full rounded-xl border bg-white text-neutral-900 placeholder:text-neutral-400 transition-colors duration-150 ease-out focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       color: fieldStateVariants,
       size: {
-        sm: 'h-8 px-2.5 text-sm',
-        md: 'h-10 px-3 text-sm',
-        lg: 'h-12 px-4 text-base',
+        [UISize.Sm]: 'h-8 px-2.5 text-sm',
+        [UISize.Md]: 'h-10 px-3 text-sm',
+        [UISize.Lg]: 'h-12 px-4 text-base',
       },
     },
-    defaultVariants: { color: 'default', size: 'md' },
+    defaultVariants: { color: UIColor.Default, size: UISize.Md },
   },
 );
 

@@ -1,10 +1,19 @@
 'use client';
 
-import { Button, Spinner } from '@/components/ui';
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  Spinner,
+  UIColor,
+  UISize,
+  UIVariant,
+} from '@/components/ui';
 import { useTranslation } from '@/i18n/client';
 import useFetcher, { HttpMethod } from '@/lib/hooks/useFetcher';
 import type { Customer } from '@/lib/schemas';
-import Link from 'next/link';
+import { MoreVertical } from 'lucide-react';
+import type { Route } from 'next';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -34,23 +43,35 @@ export function CustomerRowActions({ customer }: Props) {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <Link href={`/customers/${customer.id}/edit`}>
-        <Button variant="flat" color="default" size="sm">
-          {t('actions.edit')}
+    <Dropdown
+      align="end"
+      trigger={
+        <Button
+          variant={UIVariant.Flat}
+          color={UIColor.Default}
+          size={UISize.Md}
+          aria-label={t('actions.menu')}
+        >
+          <MoreVertical size={16} />
         </Button>
-      </Link>
-      <Button
-        variant="flat"
-        color="danger"
-        size="sm"
+      }
+    >
+      <DropdownItem onClick={() => router.push(`/customers/${customer.id}` as Route)}>
+        {t('actions.view')}
+      </DropdownItem>
+      <DropdownItem onClick={() => router.push(`/customers/${customer.id}/edit` as Route)}>
+        {t('actions.edit')}
+      </DropdownItem>
+      <DropdownItem
         disabled={pending}
+        className="text-danger hover:bg-danger/10 dark:text-danger"
         onClick={remove}
-        className="flex items-center gap-2"
       >
-        {pending && <Spinner size="sm" color="danger" />}
-        {t('actions.delete')}
-      </Button>
-    </div>
+        <span className="flex items-center gap-2">
+          {pending && <Spinner size={UISize.Sm} color={UIColor.Danger} />}
+          {t('actions.delete')}
+        </span>
+      </DropdownItem>
+    </Dropdown>
   );
 }

@@ -34,7 +34,7 @@ export function LoginForm() {
           defaultValue="changeme123"
         />
       </label>
-      {state.error ? <p className="text-red-600 dark:text-red-500 text-sm">{state.error}</p> : null}
+      {state.error ? <p className="text-danger-600 text-sm">{state.error}</p> : null}
       <Button type="submit" disabled={pending}>
         {pending ? t('auth.signingIn') : t('auth.submit')}
       </Button>

@@ -3,23 +3,24 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { type ReactNode, useEffect, useRef } from 'react';
 import { cn } from '../lib/cn';
+import { ModalSize } from '../lib/variants';
 
 export interface ModalProps {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'full';
+  size?: ModalSize;
   className?: string;
 }
 
-const sizeClasses: Record<'sm' | 'md' | 'lg' | 'full', string> = {
-  sm: 'max-w-sm',
-  md: 'max-w-lg',
-  lg: 'max-w-2xl',
-  full: 'max-w-[calc(100vw-2rem)]',
+const sizeClasses: Record<ModalSize, string> = {
+  [ModalSize.Sm]: 'max-w-sm',
+  [ModalSize.Md]: 'max-w-lg',
+  [ModalSize.Lg]: 'max-w-2xl',
+  [ModalSize.Full]: 'max-w-[calc(100vw-2rem)]',
 };
 
-export function Modal({ open, onClose, children, size = 'md', className }: ModalProps) {
+export function Modal({ open, onClose, children, size = ModalSize.Md, className }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export function Modal({ open, onClose, children, size = 'md', className }: Modal
       onClick={(event) => {
         if (event.target === dialogRef.current) onClose();
       }}
-      className="m-auto border-none bg-transparent p-0 backdrop:bg-gray-900/50"
+      className="m-auto border-none bg-transparent p-0 backdrop:bg-neutral-900/40"
     >
       <AnimatePresence onExitComplete={() => dialogRef.current?.close()}>
         {open ? (
@@ -56,7 +57,7 @@ export function Modal({ open, onClose, children, size = 'md', className }: Modal
             exit={{ opacity: 0, scale: 0.95, y: 8 }}
             transition={{ duration: 0.15 }}
             className={cn(
-              'w-full rounded-2xl bg-white p-6 shadow-lg dark:bg-gray-900',
+              'w-full rounded-2xl bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.12)]',
               sizeClasses[size],
               className,
             )}

@@ -12,14 +12,12 @@ export function EmptyState({ title, description, action, className }: EmptyState
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-200 border-dashed px-6 py-12 text-center dark:border-gray-700',
+        'flex flex-col items-center justify-center gap-2 rounded-2xl border border-neutral-200 border-dashed px-6 py-12 text-center',
         className,
       )}
     >
-      <p className="font-medium text-gray-900 dark:text-gray-50">{title}</p>
-      {description ? (
-        <p className="text-gray-500 text-sm dark:text-gray-400">{description}</p>
-      ) : null}
+      <p className="font-medium text-neutral-900">{title}</p>
+      {description ? <p className="text-neutral-500 text-sm">{description}</p> : null}
       {action ? <div className="mt-2">{action}</div> : null}
     </div>
   );

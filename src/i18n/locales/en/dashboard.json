@@ -1,5 +1,17 @@
 {
   "title": "Dashboard",
+  "subtitle": "Overview of your revenue, invoices and customers",
+  "actions": {
+    "refresh": "Refresh",
+    "newInvoice": "New invoice"
+  },
+  "rail": {
+    "activity": "Recent activity"
+  },
+  "overdue": {
+    "title": "Top overdue",
+    "empty": "Nothing overdue"
+  },
   "cards": {
     "revenuePaid": "Revenue (Paid)",
     "outstanding": "Outstanding",
